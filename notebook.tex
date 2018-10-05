@@ -1,0 +1,1009 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{linear\_regg\_from\_scartch}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+     \# \#GalsenAI 🇸🇳 First meetup
+
+    \section{Disclaimer : This is not a course, but a discussion and
+knowledge sharing between passionnated people of
+AI🤓}\label{disclaimer-this-is-not-a-course-but-a-discussion-and-knowledge-sharing-between-passionnated-people-of-ai}
+
+    \section{Let's describe the tool (Jupyter Notebook) we use to describe
+Linear regression
+😆}\label{lets-describe-the-tool-jupyter-notebook-we-use-to-describe-linear-regression}
+
+    \section{Data Science Terminology :}\label{data-science-terminology}
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+\begin{minipage}[b]{0.39\columnwidth}\raggedright\strut
+\textbf{Machine}\strut
+\end{minipage} & \begin{minipage}[b]{0.55\columnwidth}\raggedright\strut
+\textbf{Human}\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.39\columnwidth}\raggedright\strut
+\textbf{What does \texttt{learning} mean ?}\strut
+\end{minipage} & \begin{minipage}[t]{0.55\columnwidth}\raggedright\strut
+\textbf{how do we learn as human ?}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.39\columnwidth}\raggedright\strut
+\textbf{What does \texttt{prediction} mean ?}\strut
+\end{minipage} & \begin{minipage}[t]{0.55\columnwidth}\raggedright\strut
+\textbf{how do we take decision as a human ?}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.39\columnwidth}\raggedright\strut
+\textbf{What is a \texttt{model} in data science ?}\strut
+\end{minipage} & \begin{minipage}[t]{0.55\columnwidth}\raggedright\strut
+\textbf{what is expertise and knowledge for human ?}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.39\columnwidth}\raggedright\strut
+\textbf{What is \texttt{trainig} and \texttt{test} dataset ?}\strut
+\end{minipage} & \begin{minipage}[t]{0.55\columnwidth}\raggedright\strut
+\textbf{what is assigment and exams for a student ?}\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+    \section{What is linear regression ?}\label{what-is-linear-regression}
+
+    \subsubsection{\texorpdfstring{LR is used to predict \textbf{continuous}
+variable}{LR is used to predict continuous variable}}\label{lr-is-used-to-predict-continuous-variable}
+
+    \section{What is a continuous variable
+?}\label{what-is-a-continuous-variable}
+
+    \subsubsection{\texorpdfstring{A variable that can take any value in an
+\textbf{interval} in the contrary of \textbf{discrete}
+ones}{A variable that can take any value in an interval in the contrary of discrete ones}}\label{a-variable-that-can-take-any-value-in-an-interval-in-the-contrary-of-discrete-ones}
+
+    \section{SOME USE CASES :}\label{some-use-cases}
+
+    \begin{itemize}
+\tightlist
+\item
+  ** Price of a car or a house**
+\item
+  \textbf{number of lines of code needed for a program}
+\item
+  \textbf{Price of Amazon spot instance}
+\item
+  \textbf{number of time a user will spend in a web page}
+\item
+  \textbf{quantity of electricity a city will consume}
+\item
+  \textbf{use your imagination 😎😎}
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{display} \PY{k}{import} \PY{n}{display\PYZus{}html}\PY{p}{,} \PY{n}{Markdown}
+        \PY{k}{def} \PY{n+nf}{display\PYZus{}side\PYZus{}by\PYZus{}side}\PY{p}{(}\PY{o}{*}\PY{n}{args}\PY{p}{)}\PY{p}{:}
+            \PY{n}{html\PYZus{}str}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}
+            \PY{k}{for} \PY{n}{df} \PY{o+ow}{in} \PY{n}{args}\PY{p}{:}
+                \PY{n}{html\PYZus{}str}\PY{o}{+}\PY{o}{=}\PY{n}{df}\PY{o}{.}\PY{n}{to\PYZus{}html}\PY{p}{(}\PY{p}{)}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZam{}emsp;\PYZam{}emsp;\PYZam{}emsp;\PYZam{}emsp;\PYZam{}emsp;}\PY{l+s+s1}{\PYZsq{}}
+            \PY{n}{display\PYZus{}html}\PY{p}{(}\PY{n}{html\PYZus{}str}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{table}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{table style=}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{display:inline}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}\PY{n}{raw}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \section{I am a new data science freelancer and I'm the lcukiest one 😊
+=\textgreater{} just choose one in the machine learning libraries
+ghetto}\label{i-am-a-new-data-science-freelancer-and-im-the-lcukiest-one-just-choose-one-in-the-machine-learning-libraries-ghetto}
+
+    \section{Read our two datasets}\label{read-our-two-datasets}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{c+c1}{\PYZsh{} distanceXconsume}
+        \PY{n}{temp\PYZus{}vs\PYZus{}speed} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{car\PYZus{}fuel\PYZus{}consume/data.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{usecols}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,}\PY{n}{thousands}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{p}{)}
+        \PY{n}{car\PYZus{}price\PYZus{}over\PYZus{}time} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{car\PYZus{}price\PYZus{}prediction/data.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{usecols}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{p}{)}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{car\PYZus{}fuel num rows : }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{ num columns : }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{temp\PYZus{}vs\PYZus{}speed}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{car\PYZus{}price data num rows : }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{ num columns : }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{ : }\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{car\PYZus{}price\PYZus{}over\PYZus{}time}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+car\_fuel num rows : 376 num columns : 2
+car\_price data num rows : 301 num columns : 2 : 
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{display\PYZus{}side\PYZus{}by\PYZus{}side}\PY{p}{(}\PY{n}{temp\PYZus{}vs\PYZus{}speed}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{6}\PY{p}{]}\PY{p}{,}\PY{n}{car\PYZus{}price\PYZus{}over\PYZus{}time}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{6}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    
+    \section{use ScikitLearn linear
+regression}\label{use-scikitlearn-linear-regression}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{import} \PY{n}{LinearRegression}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{train\PYZus{}test\PYZus{}split}
+\end{Verbatim}
+
+
+    \section{Separate input(features) and
+labels}\label{separate-inputfeatures-and-labels}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{temp}\PY{p}{,}\PY{n}{speed} \PY{o}{=} \PY{n}{temp\PYZus{}vs\PYZus{}speed}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{,} \PY{n}{temp\PYZus{}vs\PYZus{}speed}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{values}
+        \PY{n}{Pres\PYZus{}price}\PY{p}{,}\PY{n}{Sel\PYZus{}price} \PY{o}{=} \PY{n}{car\PYZus{}price\PYZus{}over\PYZus{}time}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{,} \PY{n}{car\PYZus{}price\PYZus{}over\PYZus{}time}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{values}
+\end{Verbatim}
+
+
+    \section{sparate training and test
+dataset}\label{sparate-training-and-test-dataset}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{Pres\PYZus{}priceTrain}\PY{p}{,} \PY{n}{Pres\PYZus{}priceTest}\PY{p}{,} \PY{n}{Sel\PYZus{}priceTrain}\PY{p}{,} \PY{n}{Sel\PYZus{}priceTest} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{Pres\PYZus{}price}\PY{p}{,}\PY{n}{Sel\PYZus{}price}\PY{p}{,} \PY{n}{test\PYZus{}size} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{5}\PY{p}{)}
+         \PY{n}{tempTrain}\PY{p}{,} \PY{n}{tempTest}\PY{p}{,} \PY{n}{speedTrain}\PY{p}{,} \PY{n}{speedTest} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{temp}\PY{p}{,}\PY{n}{speed}\PY{p}{,} \PY{n}{test\PYZus{}size} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{5}\PY{p}{)}
+\end{Verbatim}
+
+
+    \section{Definne and train the model}\label{definne-and-train-the-model}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{selPriceModel} \PY{o}{=} \PY{n}{LinearRegression}\PY{p}{(}\PY{p}{)}
+         \PY{n}{selPriceModel}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{Pres\PYZus{}priceTrain}\PY{p}{,} \PY{n}{Sel\PYZus{}priceTrain}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}13}]:} LinearRegression(copy\_X=True, fit\_intercept=True, n\_jobs=1, normalize=False)
+\end{Verbatim}
+            
+    \section{Hello AI, How much should I buy these two old cars
+?}\label{hello-ai-how-much-should-i-buy-these-two-old-cars}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{car\PYZus{}price\PYZus{}over\PYZus{}time}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{:}\PY{l+m+mi}{4}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}14}]:}    Selling\_Price  Present\_Price
+         2           7.25           9.85
+         3           2.85           4.15
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{selPriceModel}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mf}{9.85}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mf}{4.15}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}15}]:} array([5.98654612, 2.64323519])
+\end{Verbatim}
+            
+    \section{🆒 🆒 🆒 but how all this works? Is this magic🎩? how can i
+implement my own linear regression
+?}\label{but-how-all-this-works-is-this-magic-how-can-i-implement-my-own-linear-regression}
+
+    \section{\texorpdfstring{First let's train a new model using the
+\textbf{speed} VS \textbf{temperature} data
+set}{First let's train a new model using the speed VS temperature data set}}\label{first-lets-train-a-new-model-using-the-speed-vs-temperature-data-set}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1284}]:} \PY{n}{display\PYZus{}side\PYZus{}by\PYZus{}side}\PY{p}{(}\PY{n}{temp\PYZus{}vs\PYZus{}speed}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{6}\PY{p}{]}\PY{p}{,}\PY{n}{car\PYZus{}price\PYZus{}over\PYZus{}time}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{6}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    
+    \section{Again let's train and
+predict}\label{again-lets-train-and-predict}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{speedModel} \PY{o}{=} \PY{n}{LinearRegression}\PY{p}{(}\PY{p}{)}
+         \PY{n}{speedModel}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{tempTrain}\PY{p}{,} \PY{n}{speedTrain}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}16}]:} LinearRegression(copy\_X=True, fit\_intercept=True, n\_jobs=1, normalize=False)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{temp\PYZus{}vs\PYZus{}speed}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{312}\PY{p}{]}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}17}]:}      speed  temp\_inside
+         0       26        215.0
+         324     29         22.0
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{speedModel}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{215}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{22}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}18}]:} array([41.8633051 , 42.31302215])
+\end{Verbatim}
+            
+    \section{Hummm, this is weired 😩😡😱😨}\label{hummm-this-is-weired}
+
+    \section{Ok Ok. Let's figure out how all this work
+🤓🧐👩🏿‍🔬👨🏿‍🔬}\label{ok-ok.-lets-figure-out-how-all-this-work}
+
+    \section{\texorpdfstring{Model :
+\(y = THETA_{1} x X_{1}+THETA_{1} x X_{1} +......+ THETA_{n}X_{n} +THETA_{0}\)}{Model : y = THETA\_\{1\} x X\_\{1\}+THETA\_\{1\} x X\_\{1\} +......+ THETA\_\{n\}X\_\{n\} +THETA\_\{0\}}}\label{model-y-theta_1-x-x_1theta_1-x-x_1-......-theta_nx_n-theta_0}
+
+\subsection{\texorpdfstring{EX :
+\(sellingPrice = THETA_{1} * presentPrice + THETA_{0}\) =\textgreater{}
+( y = ax + b
+)}{EX : sellingPrice = THETA\_\{1\} * presentPrice + THETA\_\{0\} =\textgreater{} ( y = ax + b )}}\label{ex-sellingprice-theta_1-presentprice-theta_0-y-ax-b}
+
+    \section{So What ?}\label{so-what}
+
+    \subsubsection{The goal is to have a and b that are optimized to give
+the selling price given the present
+price}\label{the-goal-is-to-have-a-and-b-that-are-optimized-to-give-the-selling-price-given-the-present-price}
+
+    \section{Loss function or Cost function
+(J)}\label{loss-function-or-cost-function-j}
+
+\subsubsection{It's the function that we will use during training to
+know if our model is learninng well the patterns in the
+data}\label{its-the-function-that-we-will-use-during-training-to-know-if-our-model-is-learninng-well-the-patterns-in-the-data}
+
+    \section{First let's . plot our model from Sckikit
+Learn}\label{first-lets-.-plot-our-model-from-sckikit-learn}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt} 
+         \PY{k}{def} \PY{n+nf}{scatterAnndPlot}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{,}\PY{n}{yPred}\PY{p}{,}\PY{n}{title}\PY{p}{,}\PY{n}{xlabel}\PY{p}{,}\PY{n}{ylabel}\PY{p}{,}\PY{n}{ax}\PY{p}{,}\PY{n}{c}\PY{p}{)}\PY{p}{:}
+             \PY{n}{ax}\PY{p}{[}\PY{n}{c}\PY{p}{]}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{ax}\PY{p}{[}\PY{n}{c}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{yPred}\PY{p}{,} \PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{blue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{ax}\PY{p}{[}\PY{n}{c}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{n}{title}\PY{p}{)}
+             \PY{n}{ax}\PY{p}{[}\PY{n}{c}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{n}{xlabel}\PY{p}{)}
+             \PY{n}{ax}\PY{p}{[}\PY{n}{c}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{n}{ylabel}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{k}{def} \PY{n+nf}{createSubPlotsEspace}\PY{p}{(}\PY{n}{num\PYZus{}rows}\PY{p}{,} \PY{n}{num\PYZus{}columns}\PY{p}{)}\PY{p}{:}
+             \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{nrows}\PY{o}{=}\PY{n}{num\PYZus{}rows}\PY{p}{,} \PY{n}{ncols}\PY{o}{=}\PY{n}{num\PYZus{}columns}\PY{p}{)}
+             \PY{n}{fig}\PY{o}{.}\PY{n}{set\PYZus{}size\PYZus{}inches}\PY{p}{(}\PY{n}{w}\PY{o}{=}\PY{l+m+mi}{25}\PY{p}{,}\PY{n}{h}\PY{o}{=}\PY{l+m+mi}{7}\PY{p}{)}
+             \PY{k}{return} \PY{n}{ax}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}69}]:} \PY{c+c1}{\PYZsh{} batch prediction}
+         \PY{n}{Sel\PYZus{}pricePredictionTrain} \PY{o}{=} \PY{n}{selPriceModel}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{Pres\PYZus{}priceTrain}\PY{p}{)}
+         \PY{n}{Sel\PYZus{}pricePredictionTest} \PY{o}{=} \PY{n}{selPriceModel}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{Pres\PYZus{}priceTest}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} plot real vs predicted values}
+         \PY{n}{PresentVsSellingSpace} \PY{o}{=} \PY{n}{createSubPlotsEspace}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{scatterAnndPlot}\PY{p}{(}\PY{n}{Pres\PYZus{}priceTrain}\PY{p}{,}\PY{n}{Sel\PYZus{}priceTrain}\PY{p}{,}\PY{n}{Sel\PYZus{}pricePredictionTrain}\PY{p}{,}
+                         \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Selling price vs Present Price (Training set)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                         \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Present price(Million FCFA)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                         \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Selling price(Million FCFA)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                         \PY{n}{PresentVsSellingSpace}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n}{scatterAnndPlot}\PY{p}{(}\PY{n}{Pres\PYZus{}priceTest}\PY{p}{,}\PY{n}{Sel\PYZus{}priceTest}\PY{p}{,}\PY{n}{Sel\PYZus{}pricePredictionTest}\PY{p}{,}
+                         \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Selling price vs Present Price (Test set)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                         \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Present price(Million FCFA)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                         \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Selling price(Million FCFA)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                         \PY{n}{PresentVsSellingSpace}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_42_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \section{Any idea on how to define that mysterious lost function
+🤔🤔🤔}\label{any-idea-on-how-to-define-that-mysterious-lost-function}
+
+    \subsubsection{\texorpdfstring{\textbf{Mean Absoluter Error(L1)} and
+\textbf{Mean Squared Error(L2)} come to the rescue
+😊}{Mean Absoluter Error(L1) and Mean Squared Error(L2) come to the rescue 😊}}\label{mean-absoluter-errorl1-and-mean-squared-errorl2-come-to-the-rescue}
+
+    \section{\texorpdfstring{L1 =
+\(\frac{1}{N} \sum_{i=1}^N|Yi-Ypred\)\textbar{} \texttt{=\textgreater{}}
+\(\frac{1}{N} \sum_{i=1}^N(Yi-(axi+b))\)}{L1 = \textbackslash{}frac\{1\}\{N\} \textbackslash{}sum\_\{i=1\}\^{}N\textbar{}Yi-Ypred\textbar{} =\textgreater{} \textbackslash{}frac\{1\}\{N\} \textbackslash{}sum\_\{i=1\}\^{}N(Yi-(axi+b))}}\label{l1-frac1n-sum_i1nyi-ypred-frac1n-sum_i1nyi-axib}
+
+    \begin{itemize}
+\tightlist
+\item
+  \textbf{all error are treated equally}
+\end{itemize}
+
+    \section{\texorpdfstring{L2 = \(\frac{1}{N} \sum_{i=1}^N(Yi-Ypred)^2\)
+\texttt{=\textgreater{}} \(\frac{1}{2N} \sum_{i=1}^N(Yi-Ypred)^2\)
+\texttt{=\textgreater{}}
+\(\frac{1}{2N} \sum_{i=1}^N(Yi-(axi+b))^2\)}{L2 = \textbackslash{}frac\{1\}\{N\} \textbackslash{}sum\_\{i=1\}\^{}N(Yi-Ypred)\^{}2 =\textgreater{} \textbackslash{}frac\{1\}\{2N\} \textbackslash{}sum\_\{i=1\}\^{}N(Yi-Ypred)\^{}2 =\textgreater{} \textbackslash{}frac\{1\}\{2N\} \textbackslash{}sum\_\{i=1\}\^{}N(Yi-(axi+b))\^{}2}}\label{l2-frac1n-sum_i1nyi-ypred2-frac12n-sum_i1nyi-ypred2-frac12n-sum_i1nyi-axib2}
+
+    \begin{itemize}
+\tightlist
+\item
+  \textbf{important errors are amplified whereas small error are
+  neglected}
+\end{itemize}
+
+    \section{So we wanna minimize this function, the less it is be the
+better is our
+model}\label{so-we-wanna-minimize-this-function-the-less-it-is-be-the-better-is-our-model}
+
+    \section{implement the L2 cost function with
+vectorization}\label{implement-the-l2-cost-function-with-vectorization}
+
+\begin{itemize}
+\tightlist
+\item
+  BLAS(Basic Linear Algebra Subprogram) =\textgreater{} Fast and cleaner
+  code
+\end{itemize}
+
+    \section{Matrix multiplication and Transpose(+
+examples)}\label{matrix-multiplication-and-transpose-examples}
+
+    \subsubsection{Theta1 * x + Theta0 == Theta1 * x + Theta0 *
+1}\label{theta1-x-theta0-theta1-x-theta0-1}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{Theta0}\PY{p}{,} \PY{n}{Theta1}\PY{p}{,} \PY{n}{x} \PY{o}{=} \PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}
+         \PY{n}{Theta} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)} \PY{c+c1}{\PYZsh{}Transform to vector}
+         \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Non vectorized : }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{Theta1}\PY{o}{*}\PY{n}{x}\PY{o}{+}\PY{n}{Theta0}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Vectorized : }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{matmul}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{Theta}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Non vectorized :  14
+Vectorized :  [[14]]
+
+    \end{Verbatim}
+
+    \section{Let's add this ones in every
+input}\label{lets-add-this-ones-in-every-input}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{k}{def} \PY{n+nf}{addOnesToDataset}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{:} \PY{c+c1}{\PYZsh{} make this take unlimited datasets}
+             \PY{n}{N}\PY{o}{=}\PY{n+nb}{len}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+             \PY{n}{oneVector} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{p}{(}\PY{n}{N}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+             \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{hstack}\PY{p}{(}\PY{p}{(}\PY{n}{oneVector}\PY{p}{,}\PY{n}{X}\PY{p}{)}\PY{p}{)}  
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{tempTrainWith1}\PY{p}{,} \PY{n}{tempTestWith1}\PY{p}{,} \PY{n}{Pres\PYZus{}priceTrainWith1}\PY{p}{,} \PY{n}{Pres\PYZus{}priceTestWith1} \PY{o}{=} \PY{n}{addOnesToDataset}\PY{p}{(}\PY{n}{tempTrain}\PY{p}{)}\PY{p}{,}\PY{n}{addOnesToDataset}\PY{p}{(}\PY{n}{tempTest}\PY{p}{)}\PY{p}{,} \PY{n}{addOnesToDataset}\PY{p}{(}\PY{n}{Pres\PYZus{}priceTrain}\PY{p}{)}\PY{p}{,} \PY{n}{addOnesToDataset}\PY{p}{(}\PY{n}{Pres\PYZus{}priceTest}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{k}{def} \PY{n+nf}{L2}\PY{p}{(}\PY{n}{X}\PY{p}{,}\PY{n}{Y}\PY{p}{,}\PY{n}{prameters}\PY{p}{)}\PY{p}{:}
+             \PY{n}{N} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+             \PY{n}{diffVector} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{matmul}\PY{p}{(}\PY{n}{X}\PY{p}{,}\PY{n}{prameters}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{Y}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{diffVectorSquare}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{power}\PY{p}{(} \PY{n}{diffVector} \PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+             \PY{n}{sumTerm} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{diffVectorSquare}\PY{p}{)}
+             \PY{k}{return} \PY{n}{sumTerm} \PY{o}{/} \PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{N}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \section{Let's have this done in one
+second}\label{lets-have-this-done-in-one-second}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}66}]:} \PY{n}{a}\PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{rand}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)} 
+         \PY{n}{b}\PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{rand}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)} 
+         \PY{n}{colors} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{blue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{yellow}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{purple}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{orange}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{green}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{Pres\PYZus{}priceTrain}\PY{p}{,} \PY{n}{Sel\PYZus{}priceTrain}\PY{p}{,} \PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{:}
+             \PY{n}{randomPrediction} \PY{o}{=} \PY{n}{Pres\PYZus{}priceTrain}\PY{o}{*}\PY{n}{a}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{+}\PY{n}{b}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{Pres\PYZus{}priceTrain}\PY{p}{,}\PY{n}{randomPrediction}\PY{p}{,} \PY{n}{color} \PY{o}{=} \PY{n}{colors}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{prediction with random a and b }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Present Price}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Selling Price}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_59_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \section{This ain't a good idea :(}\label{this-aint-a-good-idea}
+
+    \section{Hum...... How do we do this omptimization thing
+?}\label{hum......-how-do-we-do-this-omptimization-thing}
+
+    \subsection{\texorpdfstring{\textbf{Gradient Descent} is here to save
+the day
+💯😊}{Gradient Descent is here to save the day 💯😊}}\label{gradient-descent-is-here-to-save-the-day}
+
+\subsubsection{\texorpdfstring{It's an algorithm that we will use to
+minimize the cost function =\textgreater{} optimize
+THETAs(\texttt{a},\texttt{b})}{It's an algorithm that we will use to minimize the cost function =\textgreater{} optimize THETAs(a,b)}}\label{its-an-algorithm-that-we-will-use-to-minimize-the-cost-function-optimize-thetasab}
+
+    \section{\$ THETA\_\{i\} = THETA\_\{i\} - learnningRate *\$
+Δ\$THETA\_\{i\} \$}\label{theta_i-theta_i---learnningrate-ux3b4theta_i}
+
+    \section{Learning rate : control the speed of
+training}\label{learning-rate-control-the-speed-of-training}
+
+    \section{\texorpdfstring{Warning : This update have to be done
+\textbf{simultaneously, This is a bad
+implementation}}{Warning : This update have to be done simultaneously, This is a bad implementation}}\label{warning-this-update-have-to-be-done-simultaneously-this-is-a-bad-implementation}
+
+\section{\texorpdfstring{\$ THETA\_\{0\} = THETA\_\{0\} - learnningRate
+\emph{\$ Δ\$THETA\_\{0\} \$ ☕ =\textgreater{} ❌🛑⛔🚫☠☢☣ \# \$ THETA\_\{1\}
+= THETA\_\{1\} - learnningRate }\$ Δ\$THETA\_\{1\}
+\$}{\$ THETA\_\{0\} = THETA\_\{0\} - learnningRate \$ Δ\$THETA\_\{0\} \$ ☕ =\textgreater{} ❌🛑⛔🚫☠☢☣ \# \$ THETA\_\{1\} = THETA\_\{1\} - learnningRate \$ Δ\$THETA\_\{1\} \$}}\label{theta_0-theta_0---learnningrate-ux3b4theta_0-theta_1-theta_1---learnningrate-ux3b4theta_1}
+
+    
+
+    \section{Learning Rate : How quick do you really wanna learn
+?}\label{learning-rate-how-quick-do-you-really-wanna-learn}
+
+    
+
+    \subsubsection{\texorpdfstring{Now let's face this this
+\textbf{GRADIENT} thing, Do you remember your old old lesson about
+derivative and partial derivate
+?}{Now let's face this this GRADIENT thing, Do you remember your old old lesson about derivative and partial derivate ?}}\label{now-lets-face-this-this-gradient-thing-do-you-remember-your-old-old-lesson-about-derivative-and-partial-derivate}
+
+🧐😓😤🤮😵🤔😓😥😱😴😪🤤😭😤😞😟🧐😓😤🤮😵🤔😓😥😱😴😪🤤😭😤😞😟🧐😓😤🤮😵🤔😓😥😱😴😪🤤😭😤😞😟🧐😓😤🤮😵🤔😓😥😱😴😪🤤😭😤😞😟🧐😓😤🤮😵🤔😓😥😱😴😪🤤😭😤😞😟🧐😓😤🤮😵🤔😓😥😱😴😪🤤😭😤😞😟🧐😓😤🤮😵🤔😓😥😱😴😪🤤😭😤😞😟🧐😓😤🤮😵🤔😓😥😱😴😪🤤😭😤😞😟🧐😓😤🤮😵🤔😓😥😱😴😪🤤😭😤😞😟🧐😓😤🤮😵🤔😓😥😱😴😪🤤😭😤😞😟🧐😓😤🤮😵🤔😓😥😱😴😪🤤😭😤😞😟🧐😓😤🤮😵🤔😓😥😱😴😪🤤😭😤😞😟🧐😓😤🤮😵🤔😓😥😱😴😪🤤😭😤😞😟🧐😓😤🤮😵🤔😓😥😱😴😪🤤😭😤😞😟🧐😓😤🤮😵🤔😓😥😱😴😪🤤😭😤😞😟🧐😓😤🤮😵🤔😓😥😱😴😪🤤😭😤😞😟🧐😓😤🤮😵🤔😓😥😱😴😪🤤😭😤😞😟🧐😓😤🤮😵🤔😓😥😱😴😪🤤😭😤😞😟🧐😓😤🤮😵🤔😓😥😱😴😪🤤😭😤😞😟🧐😓😤🤮😵🤔😓😥😱😴😪🤤😭😤😞😟🧐😓😤🤮😵🤔😓😥😱😴😪🤤😭😤😞😟🧐😓😤🤮😵🤔😓😥😱😴😪🤤😭😤🧐😓😤🤮😵🤔😓😥😱😴😪🤤😭😤😞😟🧐😓😤🤮😵🤔😓😥😱😴😪🤤😭😤😞😟🧐😓😤
+
+    \section{Scalar Rule}\label{scalar-rule}
+
+    \section{Sum Rule}\label{sum-rule}
+
+    \section{Power Rule}\label{power-rule}
+
+    \section{Chain Rule}\label{chain-rule}
+
+    \section{Put All together}\label{put-all-together}
+
+    \section{One Half Mean Squred Error
+"Magic"}\label{one-half-mean-squred-error-magic}
+
+    😊😇🙂😌🤓🤓🙌🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿😊😇🙂😌🤓🤓🙌🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿😊😇🙂😌🤓🤓🙌🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿😊😇🙂😌🤓🤓🙌🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿😊😇🙂😌🤓🤓🙌🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿😊😇🙂😌🤓🤓🙌🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿😊😇🙂😌🤓🤓🙌🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿😊😇🙂😌🤓🤓🙌🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿😊😇🙂😌🤓🤓🙌🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿😊😇🙂😌🤓🤓🙌🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿😊😇🙂😌🤓🤓🙌🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿😊😇🙂😌🤓🤓🙌🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿😊😇🙂😌🤓🤓🙌🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿😊😇🙂😌🤓🤓🙌🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿😊😇🙂😌🤓🤓🙌🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿😊😇🙂😌🤓🤓🙌🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿😊😇🙂😌🤓🤓🙌🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿😊😇🙂😌🤓🤓🙌🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿😊😇🙂😌🤓🤓🙌🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿😊😇🙂😌🤓🤓🙌🏿👏🏿👏🏿👏🏿👏🏿😊😇🙂😌🤓🤓🙌🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿😊😇🙂😌🤓🤓🙌🏿👏😊😇🙂😌🤓🤓🙌🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿😊😇🙂😌🤓🤓🙌🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿👏🏿
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{k}{def} \PY{n+nf}{gradientDescent}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{Y}\PY{p}{,} \PY{n}{theta}\PY{p}{,} \PY{n}{alpha}\PY{p}{,} \PY{n}{epochs}\PY{p}{)}\PY{p}{:}
+             \PY{n}{N}\PY{o}{=}\PY{n+nb}{len}\PY{p}{(}\PY{n}{X}\PY{p}{)} \PY{c+c1}{\PYZsh{} Number of training examples}
+             \PY{n}{J\PYZus{}over\PYZus{}epochs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{epochs}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}  \PY{c+c1}{\PYZsh{} we will save our erros while training our model }
+             \PY{n}{theta1\PYZus{}over\PYZus{}epochs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{epochs}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} we will save values of our theta1 over epochs }
+             \PY{n}{J\PYZus{}over\PYZus{}epochs}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{n}{L2}\PY{p}{(}\PY{n}{X}\PY{p}{,}\PY{n}{Y}\PY{p}{,}\PY{n}{theta}\PY{p}{)} \PY{c+c1}{\PYZsh{} we will also save  initial theta1 and J before runnig gradient descent}
+             \PY{n}{theta1\PYZus{}over\PYZus{}epochs}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{n}{theta}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{epochs}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{ysDiff}  \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{matmul}\PY{p}{(}\PY{n}{X}\PY{p}{,}\PY{n}{theta}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{Y}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)} \PY{c+c1}{\PYZsh{} compute difference between real Y and predicted Y }
+                 \PY{n}{sumForEveryTheta} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{matmul}\PY{p}{(}\PY{n}{ysDiff}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{X}\PY{p}{)} \PY{c+c1}{\PYZsh{} this is a vector of the same size as theta}
+                 \PY{n}{gradients} \PY{o}{=} \PY{n}{sumForEveryTheta} \PY{o}{*} \PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{n}{N}\PY{p}{)} \PY{o}{*} \PY{n}{alpha} \PY{c+c1}{\PYZsh{} element wise multiplication (gradients = sumForEveryTheta * (alpha/m))}
+                 \PY{n}{theta} \PY{o}{=} \PY{n}{theta}\PY{o}{\PYZhy{}}\PY{n}{gradients}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{} new values of theta }
+                 \PY{n}{theta1\PYZus{}over\PYZus{}epochs}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{theta}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+                 \PY{n}{J\PYZus{}over\PYZus{}epochs}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{L2}\PY{p}{(}\PY{n}{X}\PY{p}{,}\PY{n}{Y}\PY{p}{,}\PY{n}{theta}\PY{p}{)} 
+             \PY{k}{return} \PY{n}{J\PYZus{}over\PYZus{}epochs}\PY{p}{,}\PY{n}{theta1\PYZus{}over\PYZus{}epochs}\PY{p}{,} \PY{n}{theta}
+\end{Verbatim}
+
+
+    \section{how our grandient descent behave with different learning
+rate}\label{how-our-grandient-descent-behave-with-different-learning-rate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{k}{def} \PY{n+nf}{plotGradientDescent}\PY{p}{(}\PY{n}{theta1}\PY{p}{,}\PY{n}{J}\PY{p}{,}\PY{n}{k}\PY{p}{,}\PY{n}{lr}\PY{p}{,}\PY{n}{ax}\PY{p}{,}\PY{n}{c}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{}global ax}
+             \PY{n}{initial\PYZus{}theta1}  \PY{o}{=} \PY{n}{theta1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+             \PY{n}{J0} \PY{o}{=} \PY{n}{J}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+             
+             \PY{n}{ax}\PY{p}{[}\PY{n}{c}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{theta1}\PY{p}{,}\PY{n}{J}\PY{p}{,}\PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+             \PY{n}{ax}\PY{p}{[}\PY{n}{c}\PY{p}{]}\PY{o}{.}\PY{n}{annotate}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Starting point}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{xy}\PY{o}{=}\PY{p}{(}\PY{n}{initial\PYZus{}theta1}\PY{p}{,}\PY{n}{J0} \PY{p}{)}\PY{p}{,} \PY{n}{xytext}\PY{o}{=}\PY{p}{(}\PY{n}{initial\PYZus{}theta1}\PY{o}{+}\PY{l+m+mf}{0.05}\PY{p}{,}\PY{n}{J0}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,}
+                     \PY{n}{arrowprops}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}\PY{n}{facecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{shrink}\PY{o}{=}\PY{l+m+mf}{0.01}\PY{p}{)}\PY{p}{,}\PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{15}
+                     \PY{p}{)}
+         
+             \PY{n}{ax}\PY{p}{[}\PY{n}{c}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{theta1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+             \PY{n}{ax}\PY{p}{[}\PY{n}{c}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{J(error)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+             \PY{n}{ax}\PY{p}{[}\PY{n}{c}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{L2 Gradient Descent with a }\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s1}{ Learning Rate = }\PY{l+s+si}{\PYZpc{}.4f}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{k}\PY{p}{,}\PY{n}{lr}\PY{p}{)}\PY{p}{,}\PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{k}{def} \PY{n+nf}{plotLossOverEpochs}\PY{p}{(}\PY{n}{epochs}\PY{p}{,}\PY{n}{J}\PY{p}{,}\PY{n}{ax}\PY{p}{,}\PY{n}{k}\PY{p}{,}\PY{n}{lr}\PY{p}{,}\PY{n}{c}\PY{p}{)}\PY{p}{:}
+             \PY{n}{ax}\PY{p}{[}\PY{n}{c}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{epochs}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,}\PY{n}{J}\PY{p}{,}\PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{ax}\PY{p}{[}\PY{n}{c}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Epochs}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+             \PY{n}{ax}\PY{p}{[}\PY{n}{c}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{J(error)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+             \PY{n}{ax}\PY{p}{[}\PY{n}{c}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Loss over epochs with a }\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s1}{ Learning Rate = }\PY{l+s+si}{\PYZpc{}.4f}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{k}\PY{p}{,}\PY{n}{lr}\PY{p}{)}\PY{p}{,}\PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{n}{initialTheta} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+         \PY{n}{epochs} \PY{o}{=} \PY{l+m+mi}{20}
+         \PY{n}{learningRates} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{BIG}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mf}{0.015}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GOOD}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mf}{0.001}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SMALL}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mf}{0.00005}\PY{p}{\PYZcb{}}
+         \PY{n}{thetas} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}} \PY{c+c1}{\PYZsh{} contains final theta for every  learning rate}
+         
+         \PY{n}{ThetaVsLossSpace} \PY{o}{=}  \PY{n}{createSubPlotsEspace}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)} \PY{c+c1}{\PYZsh{} subplots to contain all our three gradient graphic for the different learning rates}
+         \PY{n}{LossOverEpochsSpace} \PY{o}{=} \PY{n}{createSubPlotsEspace}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)} \PY{c+c1}{\PYZsh{} subplots to contain all our three loss over epochs graphic for the different learning rates}
+         
+         \PY{k}{for} \PY{n}{i}\PY{p}{,}\PY{p}{(}\PY{n}{k}\PY{p}{,}\PY{n}{lr}\PY{p}{)} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{learningRates}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{:}   
+             \PY{n}{all\PYZus{}J}\PY{p}{,}\PY{n}{theta1\PYZus{}over\PYZus{}epochs}\PY{p}{,}\PY{n}{thetas}\PY{p}{[}\PY{n}{k}\PY{p}{]} \PY{o}{=} \PY{n}{gradientDescent}\PY{p}{(}\PY{n}{Pres\PYZus{}priceTrainWith1}\PY{p}{,}\PY{n}{Sel\PYZus{}priceTrain}\PY{p}{,}\PY{n}{initialTheta}\PY{p}{,}\PY{n}{lr}\PY{p}{,}\PY{n}{epochs}\PY{p}{)}  \PY{c+c1}{\PYZsh{} training a model for the actual learninng rate}
+             
+             \PY{n}{plotGradientDescent}\PY{p}{(}\PY{n}{theta1\PYZus{}over\PYZus{}epochs}\PY{p}{,}\PY{n}{all\PYZus{}J}\PY{p}{,}\PY{n}{k}\PY{p}{,}\PY{n}{lr}\PY{p}{,}\PY{n}{ThetaVsLossSpace}\PY{p}{,}\PY{n}{i}\PY{p}{)} \PY{c+c1}{\PYZsh{} plot gradient descent for every learning rate}
+             
+             \PY{n}{plotLossOverEpochs}\PY{p}{(}\PY{n}{epochs}\PY{p}{,}\PY{n}{all\PYZus{}J}\PY{p}{,}\PY{n}{LossOverEpochsSpace}\PY{p}{,}\PY{n}{k}\PY{p}{,}\PY{n}{lr}\PY{p}{,}\PY{n}{i}\PY{p}{)}        \PY{c+c1}{\PYZsh{} plot loss over epochs for every learning rate}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_81_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_81_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Our model}\label{our-model}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{k}{for} \PY{n}{k}\PY{p}{,}\PY{n}{theta} \PY{o+ow}{in} \PY{n}{thetas}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{k}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ : }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{theta}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+BIG  :  [0.0635945  0.59632268]
+GOOD  :  [0.0388429  0.54183225]
+SMALL  :  [0.00443072 0.06329718]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{n}{finalTheta} \PY{o}{=} \PY{n}{thetas}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GOOD}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Our Model : Y = }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{ * x + }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n+nb}{tuple}\PY{p}{(}\PY{n}{finalTheta}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Our Model : Y = 0.541832 * x + 0.038843
+
+    \end{Verbatim}
+
+    \subsection{Define the predict
+function}\label{define-the-predict-function}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{k}{def} \PY{n+nf}{predict}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{theta}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{matmul}\PY{p}{(}\PY{n}{X}\PY{p}{,}\PY{n}{theta}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}67}]:} \PY{c+c1}{\PYZsh{} prediction for training and test set}
+         \PY{n}{our\PYZus{}model\PYZus{}sel\PYZus{}price\PYZus{}train\PYZus{}pred} \PY{o}{=} \PY{n}{predict}\PY{p}{(}\PY{n}{Pres\PYZus{}priceTrainWith1}\PY{p}{,}\PY{n}{finalTheta}\PY{p}{)}
+         \PY{n}{our\PYZus{}model\PYZus{}sel\PYZus{}price\PYZus{}test\PYZus{}pred} \PY{o}{=} \PY{n}{predict}\PY{p}{(}\PY{n}{Pres\PYZus{}priceTestWith1}\PY{p}{,}\PY{n}{finalTheta}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} plot training and test prediction vs real values}
+         
+         \PY{n}{selPriceVsPresentPriceSpace} \PY{o}{=} \PY{n}{createSubPlotsEspace}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{scatterAnndPlot}\PY{p}{(}\PY{n}{Pres\PYZus{}priceTrain}\PY{p}{,}\PY{n}{Sel\PYZus{}priceTrain}\PY{p}{,}\PY{n}{our\PYZus{}model\PYZus{}sel\PYZus{}price\PYZus{}train\PYZus{}pred}\PY{p}{,}
+                         \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Selling price vs Present Price (Training set)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                         \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Present price(Million FCFA)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                         \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Selling price(Million FCFA)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                         \PY{n}{selPriceVsPresentPriceSpace}\PY{p}{,}\PY{l+m+mi}{0}
+                        \PY{p}{)}
+         \PY{n}{scatterAnndPlot}\PY{p}{(}\PY{n}{Pres\PYZus{}priceTest}\PY{p}{,}\PY{n}{Sel\PYZus{}priceTest}\PY{p}{,}\PY{n}{our\PYZus{}model\PYZus{}sel\PYZus{}price\PYZus{}test\PYZus{}pred}\PY{p}{,}
+                         \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Selling price vs Present Price (Training set)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                         \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Present price(Million FCFA)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                         \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Selling price(Million FCFA)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                         \PY{n}{selPriceVsPresentPriceSpace}\PY{p}{,}\PY{l+m+mi}{1}
+                        \PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_87_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \section{Moment Of Truth : let's compare with Scikit learn
+model}\label{moment-of-truth-lets-compare-with-scikit-learn-model}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{c+c1}{\PYZsh{} give the error for train and test data}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{mean\PYZus{}squared\PYZus{}error}
+         \PY{k}{def} \PY{n+nf}{give\PYZus{}me\PYZus{}my\PYZus{}errors}\PY{p}{(}\PY{n}{yTrain}\PY{p}{,}\PY{n}{yTrainPred}\PY{p}{,}\PY{n}{yTest}\PY{p}{,}\PY{n}{yTestPred}\PY{p}{)}\PY{p}{:}
+             \PY{n}{mseTrain} \PY{o}{=} \PY{n}{mean\PYZus{}squared\PYZus{}error}\PY{p}{(}\PY{n}{yTrain}\PY{p}{,} \PY{n}{yTrainPred}\PY{p}{)}
+             \PY{n}{mseTest} \PY{o}{=} \PY{n}{mean\PYZus{}squared\PYZus{}error}\PY{p}{(}\PY{n}{yTest}\PY{p}{,} \PY{n}{yTestPred}\PY{p}{)}
+             \PY{k}{return} \PY{n}{mseTrain}\PY{p}{,} \PY{n}{mseTest}
+\end{Verbatim}
+
+
+    \section{Batch prediction}\label{batch-prediction}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}68}]:} \PY{n}{Sel\PYZus{}pricePredictionTrain} \PY{o}{=} \PY{n}{selPriceModel}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{Pres\PYZus{}priceTrain}\PY{p}{)}
+         \PY{n}{Sel\PYZus{}pricePredictionTest} \PY{o}{=} \PY{n}{selPriceModel}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{Pres\PYZus{}priceTest}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{n}{mseTrain}\PY{p}{,}\PY{n}{mseTest} \PY{o}{=} \PY{n}{give\PYZus{}me\PYZus{}my\PYZus{}errors}\PY{p}{(}\PY{n}{Sel\PYZus{}priceTrain}\PY{p}{,} \PY{n}{Sel\PYZus{}pricePredictionTrain}\PY{p}{,}\PY{n}{Sel\PYZus{}priceTest}\PY{p}{,} \PY{n}{Sel\PYZus{}pricePredictionTest}\PY{p}{)}
+         \PY{n}{trainingError} \PY{o}{=} \PY{n}{L2}\PY{p}{(}\PY{n}{Pres\PYZus{}priceTrainWith1}\PY{p}{,}\PY{n}{Sel\PYZus{}priceTrain}\PY{p}{,}\PY{n}{finalTheta}\PY{p}{)}
+         \PY{n}{testError} \PY{o}{=} \PY{n}{L2}\PY{p}{(}\PY{n}{Pres\PYZus{}priceTestWith1}\PY{p}{,}\PY{n}{Sel\PYZus{}priceTest}\PY{p}{,}\PY{n}{finalTheta}\PY{p}{)}
+         \PY{n}{display}\PY{p}{(}\PY{n}{Markdown}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{** ScikitLearn : Error on Training data : }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{; Error on Test data : }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{**}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{mseTrain}\PY{p}{,}\PY{n}{mseTest}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n}{display}\PY{p}{(}\PY{n}{Markdown}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{** Our Model : Error on Training data : }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{; Error on Test data : }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{**}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{trainingError}\PY{p}{,}\PY{n}{testError}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    ** ScikitLearn : Error on Training data : 5.494219; Error on Test data :
+9.062424**
+
+    
+    ** Our Model : Error on Training data : 2.930431; Error on Test data :
+3.621078**
+
+    
+    \section{Yeah, we did it
+😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎😎💪🏿💪🏿💪🏿}\label{yeah-we-did-it}
+
+    \section{Back to the old Problem (Speed Vs
+Temperature)}\label{back-to-the-old-problem-speed-vs-temperature}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{n}{speedPredTrain} \PY{o}{=} \PY{n}{speedModel}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{tempTrain}\PY{p}{)}
+         \PY{n}{speedPredTest} \PY{o}{=} \PY{n}{speedModel}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{tempTest}\PY{p}{)}
+         \PY{n}{mseTrain}\PY{p}{,}\PY{n}{mseTest} \PY{o}{=} \PY{n}{give\PYZus{}me\PYZus{}my\PYZus{}errors}\PY{p}{(}\PY{n}{speedTrain}\PY{p}{,} \PY{n}{speedPredTrain}\PY{p}{,}\PY{n}{speedTest}\PY{p}{,} \PY{n}{speedPredTest}\PY{p}{)}
+         \PY{n}{display}\PY{p}{(}\PY{n}{Markdown}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{** Error on Training data : }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{; Error on Test data : }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{**}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{mseTrain}\PY{p}{,}\PY{n}{mseTest}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    ** Error on Training data : 179.650440; Error on Test data :
+217.816693**
+
+    
+    \section{Always explore your data
+first}\label{always-explore-your-data-first}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}63}]:} \PY{n}{speedVsTemPlotSpace} \PY{o}{=} \PY{n}{createSubPlotsEspace}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{scatterAnndPlot}\PY{p}{(}\PY{n}{tempTrain}\PY{p}{,}\PY{n}{speedTrain}\PY{p}{,}\PY{n}{speedPredTrain}\PY{p}{,}
+                         \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Speed vs Temperature (Training set)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                         \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Temperature(Fahrenheit)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Speed(Miles)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                            \PY{n}{speedVsTemPlotSpace}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n}{scatterAnndPlot}\PY{p}{(}\PY{n}{tempTest}\PY{p}{,}\PY{n}{speedTest}\PY{p}{,}\PY{n}{speedPredTest}\PY{p}{,}
+                         \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Speed vs Temperature (Test set)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                         \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Temperature(Fahrenheit)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Speed(Miles)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                            \PY{n}{speedVsTemPlotSpace}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_97_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \section{A line can't fit this data at all, So that was the one Billion
+FCFA
+question}\label{a-line-cant-fit-this-data-at-all-so-that-was-the-one-billion-fcfa-question}
+
+    \section{Linear regression 🗣 : I can't go
+further}\label{linear-regression-i-cant-go-further}
+
+\begin{itemize}
+\tightlist
+\item
+  only straightforward line(Linear equation) =\textgreater{}
+  \textbf{Polynomial regression}
+\item
+  ony conntinuous variable =\textgreater{} \textbf{Logistic regression}
+\end{itemize}
+
+    \section{No rest for brave people
+💪🏿💪🏿💪🏿}\label{no-rest-for-brave-people}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{normal equation}
+\item
+  \textbf{Bias and Variance}
+\item
+  \textbf{Overfitting and underfitting}
+\item
+  \textbf{regularization}
+\end{itemize}
+
+    \section{Ressources}\label{ressources}
+
+    \href{http://mccormickml.com/2014/03/04/gradient-descent-derivation/}{Gradient
+Descent Derivation}
+\href{https://www.coursera.org/learn/machine-learning}{Coursera Machine
+Learning By Andre NG} \href{https://www.kaggle.com}{Kaggle}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
